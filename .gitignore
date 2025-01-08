@@ -1,0 +1,49 @@
+# Windows generated files
+Thumbs.db
+ehthumbs.db
+
+# .NET Core
+bin/
+obj/
+
+# ASP.NET specific
+wwwroot/
+
+# User secrets (local environment variables)
+secrets.json
+
+# Local environment settings (ignore configuration files that should not be shared)
+appsettings.Development.json
+appsettings.Local.json
+
+# ASP.NET temp files
+.vs/
+.vscode/
+
+# Logs and data files
+*.log
+*.sql
+*.sqlite
+
+# NUGET files
+.nuget/
+*.nupkg
+package-lock.json
+
+# JetBrains Rider
+.idea/
+
+# User-specific files (IDE configurations)
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Azure Web Apps folder (if applicable)
+$tf/
