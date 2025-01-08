@@ -1,5 +1,6 @@
 using GymTracker;
 using GymTracker.API.Startup;
+using GymTracker.Startup;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -11,6 +12,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.ConfigureAuth(builder.Configuration);
+builder.Services.ConfigureSwagger(builder.Configuration);
 builder.Services.AddApplicationServices();
 
 builder.Services.AddControllers();
@@ -26,9 +28,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthentication();  
-app.UseAuthorization();   
-
+app.UseAuthentication();
+app.UseAuthorization();
+ 
 app.MapControllers();
 
 app.Run();

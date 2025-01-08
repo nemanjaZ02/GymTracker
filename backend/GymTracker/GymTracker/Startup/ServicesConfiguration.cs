@@ -12,6 +12,8 @@ namespace GymTracker
             services.AddScoped<ITokenGenerator, TokenGenerator>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IWorkoutRepository, WorkoutRepository>();
+            services.AddScoped<IWorkoutService, WorkoutService>();
         }
     }
 }

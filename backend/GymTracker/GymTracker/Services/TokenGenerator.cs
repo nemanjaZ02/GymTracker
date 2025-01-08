@@ -9,13 +9,13 @@ namespace GymTracker.Services
 {
     public class TokenGenerator : ITokenGenerator
     {
-        private readonly string _secretKey = JwtHelper.GenerateRandomSecretKey();  
+        private readonly string _secretKey = "ZjZ2Nm0BGzdoONXizF7cGH5HZ1akjP3k7uLpiJ5OhcU=";  
 
         public string GenerateJwtToken(int userId, string username, string email)
         {
             var claims = new[]
             {  
-                new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
                 new Claim(JwtRegisteredClaimNames.Sub, username),
                 new Claim(JwtRegisteredClaimNames.Name, email)
             };
@@ -32,19 +32,6 @@ namespace GymTracker.Services
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-    }
-}
-
-public class JwtHelper
-{
-    public static string GenerateRandomSecretKey()
-    {
-        using (var rng = new RNGCryptoServiceProvider())
-        {
-            byte[] secretKeyBytes = new byte[32]; 
-            rng.GetBytes(secretKeyBytes);
-            return Convert.ToBase64String(secretKeyBytes); 
         }
     }
 }

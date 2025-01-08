@@ -8,9 +8,9 @@ namespace GymTracker.API.Startup
     {
         public static IServiceCollection ConfigureAuth(this IServiceCollection services, IConfiguration configuration)
         {
-            var key = configuration["JWT_KEY"] ?? "jwt_secret_key";  
-            var issuer = configuration["JWT_ISSUER"] ?? "app";
-            var audience = configuration["JWT_AUDIENCE"] ?? "app-users";
+            var key = configuration["JwtSettings:SecretKey"];
+            var issuer = configuration["JwtSettings:Issuer"];
+            var audience = configuration["JwtSettings:Audience"];
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
