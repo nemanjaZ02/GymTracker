@@ -23,5 +23,11 @@ namespace GymTracker.Repositories
         {
             return _context.Workouts.Where(w => w.UserId == userId).ToList();
         }
+
+        public IEnumerable<Workout> GetByMonth(int userId, int month, int year)
+        {
+            return _context.Workouts
+                .Where(w => w.UserId == userId && w.Date.Month == month && w.Date.Year == year);
+        }
     }
 }

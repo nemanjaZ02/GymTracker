@@ -3,13 +3,16 @@ using GymTracker.API.Startup;
 using GymTracker.Startup;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using DotNetEnv;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Env.Load();
+
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(Env.GetString("DefaultConnection")));
 
 builder.Services.ConfigureAuth(builder.Configuration);
 builder.Services.ConfigureSwagger(builder.Configuration);

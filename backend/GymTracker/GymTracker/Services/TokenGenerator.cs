@@ -1,4 +1,5 @@
-﻿using GymTracker.Services.Interfaces;
+﻿using DotNetEnv;
+using GymTracker.Services.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -9,7 +10,9 @@ namespace GymTracker.Services
 {
     public class TokenGenerator : ITokenGenerator
     {
-        private readonly string _secretKey = "ZjZ2Nm0BGzdoONXizF7cGH5HZ1akjP3k7uLpiJ5OhcU=";  
+        private readonly string _secretKey = Env.GetString("Jwt_SecretKey");
+        private readonly string _issuer = Env.GetString("Jwt_Issuer");
+        private readonly string _audience = Env.GetString("Jwt_Audience"); 
 
         public string GenerateJwtToken(int userId, string username, string email)
         {
@@ -24,8 +27,8 @@ namespace GymTracker.Services
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer: "GymTracker",
-                audience: "gymtracker-users",
+                issuer: _issuer,
+                audience: _audience,
                 claims: claims,
                 expires: DateTime.UtcNow.AddMinutes(60),  
                 signingCredentials: credentials

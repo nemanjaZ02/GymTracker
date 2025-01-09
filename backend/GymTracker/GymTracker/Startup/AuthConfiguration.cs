@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using DotNetEnv;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -8,9 +9,9 @@ namespace GymTracker.API.Startup
     {
         public static IServiceCollection ConfigureAuth(this IServiceCollection services, IConfiguration configuration)
         {
-            var key = configuration["JwtSettings:SecretKey"];
-            var issuer = configuration["JwtSettings:Issuer"];
-            var audience = configuration["JwtSettings:Audience"];
+            var key = Env.GetString("Jwt_SecretKey");
+            var issuer = Env.GetString("Jwt_Issuer");
+            var audience = Env.GetString("Jwt_Audience");
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
