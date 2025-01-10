@@ -7,31 +7,19 @@
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <form>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
         <mat-form-field class="form-group" appearance="outline">
           <mat-label>Email</mat-label>
-          <input matInput type="email" placeholder="Enter your email" required />
+          <input formControlName="email" matInput type="email" placeholder="Enter your email" required />
         </mat-form-field>
 
         <mat-form-field class="form-group" appearance="outline">
           <mat-label>Password</mat-label>
-          <input
-            matInput
-            type="password"
-            placeholder="Enter your password"
-            required
-          />
+          <input formControlName="password" matInput type="password" placeholder="Enter your password" required/>
         </mat-form-field>
 
         <div class="form-actions">
-          <button
-            mat-raised-button
-            color="primary"
-            type="submit"
-            class="full-width-button"
-          >
-            Login
-          </button>
+          <button mat-raised-button color="primary" type="submit" class="full-width-button">Login</button>
         </div>
       </form>
     </mat-card-content>

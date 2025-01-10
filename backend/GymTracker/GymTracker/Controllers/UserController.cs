@@ -22,15 +22,12 @@ namespace GymTracker.Controllers
         {
             try
             {
-                bool isSuccess = _userService.Register(user);
-                if (isSuccess)
-                    return Ok("User registered successfully");
-
-                return BadRequest("Registration failed.");
+                AuthenticationTokenDto token = _userService.Register(user);
+                return Ok(token);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return Ok(ex.Message);
             }
         }
 
@@ -39,12 +36,12 @@ namespace GymTracker.Controllers
         {
             try
             {
-                string token = _userService.Login(credentials.Email, credentials.Password);
+                AuthenticationTokenDto token = _userService.Login(credentials.Email, credentials.Password);
                 return Ok(token);
             }
             catch (UnauthorizedAccessException)
             {
-                return Unauthorized("Invalid credentials");
+                return Unauthorized(new { message = "Invalid credentials" });
             }
         }
     }

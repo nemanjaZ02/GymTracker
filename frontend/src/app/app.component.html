@@ -3,7 +3,8 @@
     <a class="logo-link">GymTracker</a>
   </button>
   <span class="spacer"></span>
-  <button mat-button [routerLink]="'/login'">Login</button>
-  <button mat-button [routerLink]="'/register'">Register</button>
+  <button *ngIf="user && user.username !== ''" mat-button>{{user.username}}</button>
+  <button *ngIf="user && user.username == ''" mat-button [routerLink]="'/login'">Login</button>
+  <button *ngIf="user && user.username == ''" mat-button [routerLink]="'/register'">Register</button>
 </mat-toolbar>
 <router-outlet></router-outlet>

@@ -7,32 +7,21 @@
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <form>
+      <form [formGroup]="registrationForm" (ngSubmit)="register()">
         <mat-form-field class="form-group" appearance="outline">
-          <mat-label>First Name</mat-label>
-          <input matInput type="text" placeholder="Enter your first name" required />
-        </mat-form-field>
-
-        <mat-form-field class="form-group" appearance="outline">
-          <mat-label>Last Name</mat-label>
-          <input matInput type="text" placeholder="Enter your last name" required />
+          <mat-label>Username</mat-label>
+          <input formControlName="username" matInput type="text" placeholder="Enter your username" required />
         </mat-form-field>
 
         <mat-form-field class="form-group" appearance="outline">
           <mat-label>Email</mat-label>
-          <input matInput type="email" placeholder="Enter your email" required />
+          <input formControlName="email" matInput type="email" placeholder="Enter your email" required />
         </mat-form-field>
 
         <mat-form-field class="form-group" appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput type="password" placeholder="Create a password" required />
+          <input formControlName="password" matInput type="password" placeholder="Create a password" required />
         </mat-form-field>
-
-        <mat-form-field class="form-group" appearance="outline">
-          <mat-label>Confirm Password</mat-label>
-          <input matInput type="password" placeholder="Confirm your password" required />
-        </mat-form-field>
-
         <div class="form-actions">
           <button
             mat-raised-button

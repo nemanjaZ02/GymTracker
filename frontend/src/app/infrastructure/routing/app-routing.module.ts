@@ -6,6 +6,7 @@ import { RegisterFormComponent } from '../../feature-modules/auth/register/regis
 const routes: Routes = [
   { path: 'login', component: LoginFormComponent},
 	{ path: 'register', component: RegisterFormComponent},
+  { path: 'home', redirectTo: '/' },
 ];
 
 @NgModule({

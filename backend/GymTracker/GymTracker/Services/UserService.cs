@@ -16,7 +16,7 @@ namespace GymTracker.Services
             _tokenGenerator = tokenGenerator;
         }
 
-        public string Login(string email, string password)
+        public AuthenticationTokenDto Login(string email, string password)
         {
             var user = _userRepository.GetByEmail(email);
             if (user == null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
@@ -24,10 +24,12 @@ namespace GymTracker.Services
                 throw new UnauthorizedAccessException("Invalid credentials");
             }
 
-            return _tokenGenerator.GenerateJwtToken(user.Id, user.Username, user.Email);
+            AuthenticationTokenDto token = new AuthenticationTokenDto();
+            token.AccessToken = _tokenGenerator.GenerateJwtToken(user.Id, user.Username, user.Email);
+            return token;
         }
 
-        public bool Register(User user)
+        public AuthenticationTokenDto Register(User user)
         {
             var existingUserByUsername = _userRepository.GetByUsername(user.Username);
             if (existingUserByUsername != null)
@@ -43,7 +45,9 @@ namespace GymTracker.Services
 
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
             _userRepository.Add(user);
-            return true;
+            AuthenticationTokenDto token = new AuthenticationTokenDto();
+            token.AccessToken = _tokenGenerator.GenerateJwtToken(user.Id, user.Username, user.Email);
+            return token;
         }
     }
 }

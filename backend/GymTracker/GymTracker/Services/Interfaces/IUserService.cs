@@ -1,10 +1,11 @@
-﻿using GymTracker.Models;
+﻿using GymTracker.Dtos;
+using GymTracker.Models;
 
 namespace GymTracker.Services.Interfaces
 {
     public interface IUserService
     {
-        bool Register(User user);      
-        string Login(string email, string password);
+        AuthenticationTokenDto Register(User user);
+        AuthenticationTokenDto Login(string email, string password);
     }
 }

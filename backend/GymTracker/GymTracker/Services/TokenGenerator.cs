@@ -18,9 +18,9 @@ namespace GymTracker.Services
         {
             var claims = new[]
             {  
-                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
-                new Claim(JwtRegisteredClaimNames.Sub, username),
-                new Claim(JwtRegisteredClaimNames.Name, email)
+                new Claim("id", userId.ToString()),
+                new Claim("username", username),
+                new Claim("email", email)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey));

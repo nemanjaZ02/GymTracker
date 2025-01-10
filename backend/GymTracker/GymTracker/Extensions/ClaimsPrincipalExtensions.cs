@@ -6,7 +6,7 @@ namespace GymTracker.Extensions
     {
         public static int Id(this ClaimsPrincipal user)
         {
-            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = user.FindFirst("id")?.Value;
             return userId != null ? int.Parse(userId) : 0; 
         }
     }
