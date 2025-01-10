@@ -31,17 +31,16 @@ namespace GymTracker.Services
 
         public AuthenticationTokenDto Register(User user)
         {
+            if (string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.Email) || string.IsNullOrWhiteSpace(user.Password))
+                throw new Exception("Username, email and password are required");
+
             var existingUserByUsername = _userRepository.GetByUsername(user.Username);
             if (existingUserByUsername != null)
-            {
                 throw new Exception("Username is already taken");
-            }
 
             var existingUserByEmail = _userRepository.GetByEmail(user.Email);
             if (existingUserByEmail != null)
-            {
                 throw new Exception("Email is already taken");
-            }
 
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
             _userRepository.Add(user);

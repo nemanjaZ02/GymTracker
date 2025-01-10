@@ -1,10 +1,2 @@
-<mat-toolbar color="primary">
-  <button mat-button class="logo-button" [routerLink]="'/'">
-    <a class="logo-link">GymTracker</a>
-  </button>
-  <span class="spacer"></span>
-  <button *ngIf="user && user.username !== ''" mat-button>{{user.username}}</button>
-  <button *ngIf="user && user.username == ''" mat-button [routerLink]="'/login'">Login</button>
-  <button *ngIf="user && user.username == ''" mat-button [routerLink]="'/register'">Register</button>
-</mat-toolbar>
+<app-navbar></app-navbar>
 <router-outlet></router-outlet>

@@ -9,6 +9,7 @@ import { JwtInterceptor } from './infrastructure/jwt/jwt.interceptor';
 import { AppRoutingModule } from './infrastructure/routing/app-routing.module';
 import { AuthModule } from './feature-modules/auth/auth.module';
 import { MaterialModule } from './infrastructure/mat/material';
+import { LayoutModule } from './feature-modules/layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MaterialModule } from './infrastructure/mat/material';
     HttpClientModule,
 
 		AuthModule,
-		MaterialModule
+		MaterialModule,
+    LayoutModule
 ],
   providers: [
     {

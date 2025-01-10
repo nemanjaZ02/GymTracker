@@ -27,7 +27,7 @@ namespace GymTracker.Controllers
             }
             catch (Exception ex)
             {
-                return Ok(ex.Message);
+                return Conflict(ex.Message);
             }
         }
 
@@ -39,9 +39,9 @@ namespace GymTracker.Controllers
                 AuthenticationTokenDto token = _userService.Login(credentials.Email, credentials.Password);
                 return Ok(token);
             }
-            catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException ex)
             {
-                return Unauthorized(new { message = "Invalid credentials" });
+                return Unauthorized(ex.Message);
             }
         }
     }

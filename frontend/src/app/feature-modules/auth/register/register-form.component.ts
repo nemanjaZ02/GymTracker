@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Registration } from '../../../infrastructure/models/registration.model';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   standalone: false,
@@ -11,10 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register-form.component.css', '../../../../styles.css']
 })
 export class RegisterFormComponent {
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-  ) {}
+  constructor( private authService: AuthService, private router: Router, private snackBar: MatSnackBar ) {}
 
   registrationForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
@@ -36,6 +34,10 @@ export class RegisterFormComponent {
           this.router.navigateByUrl('/home');
         },error: (error) => {
           console.log(error);
+          this.snackBar.open(error.error, 'Close', {
+            duration: 5000,
+            panelClass: ['mat-toolbar', 'mat-warn']
+          });
         }
       });
     }

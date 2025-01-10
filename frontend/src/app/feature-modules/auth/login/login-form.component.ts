@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { Login } from '../../../infrastructure/models/login.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   standalone: false,
@@ -11,7 +12,7 @@ import { Login } from '../../../infrastructure/models/login.model';
   styleUrls: ['./login-form.component.css', '../../../../styles.css']
 })
 export class LoginFormComponent {
-  constructor( private authService: AuthService, private router: Router ) {}
+  constructor( private authService: AuthService, private router: Router, private snackBar: MatSnackBar ) {}
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required]),
@@ -30,6 +31,10 @@ export class LoginFormComponent {
           this.router.navigate(['/home']);
         },error: (error) => {
           console.log(error);
+          this.snackBar.open(error.error, 'Close', {
+            duration: 5000,
+            panelClass: ['mat-toolbar', 'mat-warn']
+          });
         }
       });
     }
