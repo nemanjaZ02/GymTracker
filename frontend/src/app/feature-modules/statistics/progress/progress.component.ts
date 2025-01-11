@@ -2,6 +2,16 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { StatisticsService } from '../statistics.service';
 import { Progress } from '../../../infrastructure/models/progress.model';
+import { Chart, ChartData, ChartOptions, BarController, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js';
+
+Chart.register(
+  BarController,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend
+);
 
 @Component({
   standalone: false,
@@ -34,6 +44,24 @@ export class ProgressComponent {
     year: new FormControl('', Validators.required),
   });
 
+  chartOptions: ChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+    },
+    scales: {
+      x: { type: 'category' },
+      y: { beginAtZero: true },
+    },
+  };
+
+  totalDurationData: ChartData<'bar'> | null = null;
+  totalWorkoutsData: ChartData<'bar'> | null = null;
+  averageIntensityData: ChartData<'bar'> | null = null;
+  averageFatigueData: ChartData<'bar'> | null = null;
+
   constructor(private statisticsService: StatisticsService) {}
 
   getProgress(): void {
@@ -45,11 +73,74 @@ export class ProgressComponent {
       this.statisticsService.getProgress(monthNumber, yearNumber).subscribe({
         next: (data) => {
           this.progress = data;
+          this.prepareChartData();
         },
         error: (err) => {
           console.error('Error fetching progress:', err);
         },
       });
+    }
+  }
+
+  prepareChartData(): void {
+    if (this.progress) {
+      const labels = this.progress.weeklyProgress.map((week) => `Week ${week.week}`);
+      const totalDurations = this.progress.weeklyProgress.map((week) => week.statistics.totalDuration);
+      const totalWorkouts = this.progress.weeklyProgress.map((week) => week.statistics.totalWorkouts);
+      const averageIntensities = this.progress.weeklyProgress.map((week) => week.statistics.averageIntensity);
+      const averageFatigues = this.progress.weeklyProgress.map((week) => week.statistics.averageFatigue);
+
+      this.totalDurationData = {
+        labels,
+        datasets: [
+          {
+            label: 'Total Duration (mins)',
+            data: totalDurations,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      this.totalWorkoutsData = {
+        labels,
+        datasets: [
+          {
+            label: 'Total Workouts',
+            data: totalWorkouts,
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      this.averageIntensityData = {
+        labels,
+        datasets: [
+          {
+            label: 'Average Intensity',
+            data: averageIntensities,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      this.averageFatigueData = {
+        labels,
+        datasets: [
+          {
+            label: 'Average Fatigue',
+            data: averageFatigues,
+            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+            borderColor: 'rgba(153, 102, 255, 1)',
+            borderWidth: 1,
+          },
+        ],
+      };
     }
   }
 

@@ -23,23 +23,20 @@
     </button>
   </form>
 
-  <div *ngIf="progress" class="progress-display">
-    <h3>
-      Progress for {{ getMonthLabel(progress!.month) }} {{ progress!.year }}
-    </h3>
-    <ul>
-      <li *ngFor="let week of progress.weeklyProgress">
-        <strong>Week {{ week.week }}:</strong>
-        <div>Total Duration: {{ week.statistics.totalDuration }} mins</div>
-        <div>Total Workouts: {{ week.statistics.totalWorkouts }}</div>
-        <div>Average Intensity: {{ week.statistics.averageIntensity }}</div>
-        <div>Average Fatigue: {{ week.statistics.averageFatigue }}</div>
-      </li>
-    </ul>
-  </div>
+  <div class="chart-container" *ngIf="progress">
+    <h3>Progress for {{ getMonthLabel(progress!.month) }} {{ progress!.year }}</h3>
 
-  <!-- Show Message When No Data is Available -->
-  <div *ngIf="!progress && progressForm.valid" class="no-progress">
-    No progress available for the selected month and year.
+    <div class="chart-wrapper">
+      <canvas *ngIf="totalDurationData" baseChart [data]="totalDurationData" [options]="chartOptions" type="bar"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <canvas *ngIf="totalWorkoutsData" baseChart [data]="totalWorkoutsData" [options]="chartOptions" type="bar"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <canvas *ngIf="averageIntensityData" baseChart [data]="averageIntensityData" [options]="chartOptions" type="bar"></canvas>
+    </div>
+    <div class="chart-wrapper">
+      <canvas *ngIf="averageFatigueData" baseChart [data]="averageFatigueData" [options]="chartOptions" type="bar"></canvas>
+    </div>
   </div>
 </div>
