@@ -20,6 +20,11 @@ namespace GymTracker.Controllers
         [HttpPost("add")]
         public IActionResult Add([FromBody] Workout workout)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); 
+            }
+
             int userId = User.Id();
 
             if(userId != 0)

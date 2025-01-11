@@ -1,0 +1,96 @@
+<div class="form-container">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title class="card-title">Add a Workout</mat-card-title>
+      <mat-card-subtitle class="card-subtitle">
+        Fill in the details below to log your workout.
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="workoutForm" (ngSubmit)="addWorkout()">
+        <mat-form-field class="form-group" appearance="outline">
+          <mat-label>Date</mat-label>
+          <input
+            matInput
+            type="datetime-local"
+						formControlName="date"
+            placeholder="Select a date"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field class="form-group" appearance="outline">
+          <mat-label>Duration (minutes)</mat-label>
+          <input
+            matInput
+            type="number"
+						formControlName="duration"
+            placeholder="Enter workout duration"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field class="form-group" appearance="outline">
+          <mat-label>Workout Type</mat-label>
+          <mat-select formControlName="type" required>
+            <mat-option value="Cardio">Cardio</mat-option>
+            <mat-option value="Strength">Strength</mat-option>
+            <mat-option value="Flexibility">Flexibility</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="form-group" appearance="outline">
+          <mat-label>Calories Burned</mat-label>
+          <input
+            matInput
+            type="number"
+						formControlName="caloriesBurned"
+            placeholder="Enter calories burned"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field class="form-group" appearance="outline">
+          <mat-label>Intensity (1-10)</mat-label>
+          <input
+            matInput
+            type="number"
+						formControlName="intensity"
+            placeholder="Rate workout intensity"
+            required
+            min="1"
+            max="10"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="form-group" appearance="outline">
+          <mat-label>Fatigue (1-10)</mat-label>
+          <input
+            matInput
+            type="number"
+						formControlName="fatigue"
+            placeholder="Rate workout fatigue"
+            required
+            min="1"
+            max="10"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="form-group" appearance="outline">
+          <mat-label>Notes</mat-label>
+          <textarea
+            matInput
+						formControlName="notes"
+            placeholder="Add any notes about your workout"
+          ></textarea>
+        </mat-form-field>
+
+        <div class="form-actions">
+          <button mat-raised-button color="primary" type="submit" class="full-width-button">
+            Save Workout
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

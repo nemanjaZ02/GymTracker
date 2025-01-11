@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GymTracker.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250110133513_migrationlmao")]
-    partial class migrationlmao
+    [Migration("20250110235854_migrationnew")]
+    partial class migrationnew
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,7 +75,8 @@ namespace GymTracker.Migrations
 
                     b.Property<string>("Notes")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<int>("Type")
                         .HasColumnType("integer");

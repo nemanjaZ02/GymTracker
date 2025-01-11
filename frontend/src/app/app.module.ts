@@ -4,12 +4,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
 import { JwtInterceptor } from './infrastructure/jwt/jwt.interceptor';
 import { AppRoutingModule } from './infrastructure/routing/app-routing.module';
 import { AuthModule } from './feature-modules/auth/auth.module';
 import { MaterialModule } from './infrastructure/mat/material';
 import { LayoutModule } from './feature-modules/layout/layout.module';
+import { WorkoutModule } from './feature-modules/workout/workout.module';
 
 @NgModule({
   declarations: [
@@ -21,10 +21,10 @@ import { LayoutModule } from './feature-modules/layout/layout.module';
     BrowserAnimationsModule,
 		AppRoutingModule,
     HttpClientModule,
-
 		AuthModule,
 		MaterialModule,
-    LayoutModule
+    LayoutModule,
+    WorkoutModule
 ],
   providers: [
     {

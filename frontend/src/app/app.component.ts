@@ -15,11 +15,8 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.authService.user$.subscribe(user => {
-      this.user = user;
-
     this.checkIfUserExists();
-  })};
+  }
 
   private checkIfUserExists(): void {
     this.authService.checkIfUserExists();

@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GymTracker.Migrations
 {
     /// <inheritdoc />
-    public partial class migrationlmao : Migration
+    public partial class migrationnew : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,7 +37,7 @@ namespace GymTracker.Migrations
                     Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Duration = table.Column<double>(type: "double precision", nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
-                    Notes = table.Column<string>(type: "text", nullable: false),
+                    Notes = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false),
                     CaloriesBurned = table.Column<double>(type: "double precision", nullable: false),
                     Intensity = table.Column<int>(type: "integer", nullable: false),
                     Fatigue = table.Column<int>(type: "integer", nullable: false)

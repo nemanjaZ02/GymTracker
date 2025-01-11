@@ -72,7 +72,8 @@ namespace GymTracker.Migrations
 
                     b.Property<string>("Notes")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<int>("Type")
                         .HasColumnType("integer");
