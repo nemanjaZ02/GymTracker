@@ -1,0 +1,45 @@
+<div class="progress-container">
+  <form [formGroup]="progressForm" (ngSubmit)="getProgress()">
+    <mat-form-field class="form-group" appearance="outline">
+      <mat-label>Month</mat-label>
+      <mat-select formControlName="month" required>
+        <mat-option *ngFor="let month of months" [value]="month.value">
+          {{ month.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="form-group" appearance="outline">
+      <mat-label>Year</mat-label>
+      <mat-select formControlName="year" required>
+        <mat-option *ngFor="let year of years" [value]="year">
+          {{ year }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="progressForm.invalid">
+      Get Progress
+    </button>
+  </form>
+
+  <div *ngIf="progress" class="progress-display">
+    <h3>
+      Progress for {{ getMonthLabel(progress!.month) }} {{ progress!.year }}
+    </h3>
+    <ul>
+      <li *ngFor="let week of progress.weeklyProgress">
+        <strong>Week {{ week.week }}:</strong>
+        <div>Total Duration: {{ week.statistics.totalDuration }} mins</div>
+        <div>Total Workouts: {{ week.statistics.totalWorkouts }}</div>
+        <div>Average Intensity: {{ week.statistics.averageIntensity }}</div>
+        <div>Average Fatigue: {{ week.statistics.averageFatigue }}</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Show Message When No Data is Available -->
+  <div *ngIf="!progress && progressForm.valid" class="no-progress">
+    No progress available for the selected month and year.
+  </div>
+</div>

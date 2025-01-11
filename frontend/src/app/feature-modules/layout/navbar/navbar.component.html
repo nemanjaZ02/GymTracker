@@ -4,6 +4,7 @@
   </button>
   <span class="spacer"></span>
   <button *ngIf="user && user.username !== ''" mat-button>{{user.username}}</button>
+  <button *ngIf="user && user.username !== ''" mat-button [routerLink]="'/progress'">My Progress</button>
 	<button *ngIf="user && user.username !== ''" mat-button (click)="logOut()">LogOut</button>
   <button *ngIf="user && user.username == ''" mat-button [routerLink]="'/login'">Login</button>
   <button *ngIf="user && user.username == ''" mat-button [routerLink]="'/register'">Register</button>

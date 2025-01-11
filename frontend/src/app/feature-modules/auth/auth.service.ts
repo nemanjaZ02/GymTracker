@@ -46,6 +46,7 @@ export class AuthService {
     this.router.navigate(['/home']).then(_ => {
       this.tokenStorage.clear();
       this.user$.next({username: "", id: 0, email: "" });
+      location.reload();
       }
     );
   }

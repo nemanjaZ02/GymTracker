@@ -10,6 +10,7 @@ import { AuthModule } from './feature-modules/auth/auth.module';
 import { MaterialModule } from './infrastructure/mat/material';
 import { LayoutModule } from './feature-modules/layout/layout.module';
 import { WorkoutModule } from './feature-modules/workout/workout.module';
+import { StatisticsModule } from './feature-modules/statistics/statistics.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { WorkoutModule } from './feature-modules/workout/workout.module';
 		AuthModule,
 		MaterialModule,
     LayoutModule,
-    WorkoutModule
+    WorkoutModule,
+    StatisticsModule
 ],
   providers: [
     {
