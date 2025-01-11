@@ -33,9 +33,9 @@
         <mat-form-field class="form-group" appearance="outline">
           <mat-label>Workout Type</mat-label>
           <mat-select formControlName="type" required>
-            <mat-option value="Cardio">Cardio</mat-option>
-            <mat-option value="Strength">Strength</mat-option>
-            <mat-option value="Flexibility">Flexibility</mat-option>
+            <mat-option [value]="0">Cardio</mat-option>
+            <mat-option [value]="1">Strength</mat-option>
+            <mat-option [value]="2">Flexibility</mat-option>
           </mat-select>
         </mat-form-field>
 

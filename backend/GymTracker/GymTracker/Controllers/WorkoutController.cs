@@ -36,7 +36,7 @@ namespace GymTracker.Controllers
             return Ok(success);
         }
 
-        [HttpGet("user/workouts")]
+        [HttpGet("getAll")]
         public IActionResult GetAllForUser()
         {
             int userId = User.Id();

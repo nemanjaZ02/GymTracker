@@ -29,6 +29,10 @@ export class LoginFormComponent {
       this.authService.login(login).subscribe({
         next: () => {
           this.router.navigate(['/home']);
+          this.snackBar.open("Login successful! Redirecting you to the home page.", 'Close', {
+            duration: 5000,
+            panelClass: ['mat-toolbar', 'mat-warn']
+          });
         },error: (error) => {
           console.log(error);
           this.snackBar.open(error.error, 'Close', {

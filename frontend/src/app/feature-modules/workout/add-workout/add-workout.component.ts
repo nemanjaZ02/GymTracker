@@ -18,7 +18,7 @@ export class AddWorkoutComponent {
 		date: new FormControl('', [Validators.required]), 
 		duration: new FormControl(0, [Validators.required, Validators.min(0)]), 
 		type: new FormControl(0, [Validators.required]), 
-		notes: new FormControl(''), 
+		notes: new FormControl('', [Validators.maxLength(500)]),
 		caloriesBurned: new FormControl(0, [Validators.required, Validators.min(0)]),
 		intensity: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(10)]), 
 		fatigue: new FormControl(0, [Validators.required, Validators.min(1), Validators.max(10)]), 
@@ -30,7 +30,7 @@ export class AddWorkoutComponent {
 				userId: 0,
 				date: this.workoutForm.value.date ? new Date(this.workoutForm.value.date).toISOString() : '',
 				duration: this.workoutForm.value.duration || 0,
-				type: this.workoutForm.value.duration || 0,
+				type: this.workoutForm.value.type || 0,
 				notes: this.workoutForm.value.notes || '',
 				caloriesBurned: this.workoutForm.value.caloriesBurned || 0,
 				intensity: this.workoutForm.value.intensity || 0,
@@ -41,10 +41,13 @@ export class AddWorkoutComponent {
 				this.workoutService.add(workout).subscribe({
 					next: () => {
 						this.router.navigateByUrl('/home');
+						this.snackBar.open("Workout added successfully! Keep up the great work!", 'Close', {
+							duration: 3000,
+							panelClass: ['mat-toolbar', 'mat-warn'],
+						});
 					},error: (error) => {
 						console.log(error);
-
-						this.snackBar.open("Try Again!", 'Close', {
+						this.snackBar.open("Oops, try again!", 'Close', {
 							duration: 3000,
 							panelClass: ['mat-toolbar', 'mat-warn'],
 						});

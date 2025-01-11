@@ -32,6 +32,10 @@ export class RegisterFormComponent {
       this.authService.register(registration).subscribe({
         next: () => {
           this.router.navigateByUrl('/home');
+          this.snackBar.open("Account created successfully! Let’s get started on tracking your workouts.", 'Close', {
+            duration: 5000,
+            panelClass: ['mat-toolbar', 'mat-warn']
+          });
         },error: (error) => {
           console.log(error);
           this.snackBar.open(error.error, 'Close', {

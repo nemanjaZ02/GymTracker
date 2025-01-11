@@ -19,4 +19,14 @@ export class WorkoutService {
       })
     );
   }
+
+  getAll(): Observable<Workout[]> {
+    return this.http
+    .get<Workout[]>(environment.apiHost + 'workout/getAll')
+    .pipe(
+      tap((workoutResponse) => {
+        console.log(workoutResponse);
+      })
+    );
+  }
 }

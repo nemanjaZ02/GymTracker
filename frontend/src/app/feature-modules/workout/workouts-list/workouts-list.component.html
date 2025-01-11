@@ -1,0 +1,54 @@
+<div class="workouts-container" *ngIf="user && user.username !== ''">
+	<div class="add-workout-container">
+    <button mat-fab color="primary" (click)="navigateToAddWorkout()" class="add-workout-button">
+      <mat-icon>add</mat-icon>
+    </button>
+    <p class="add-workout-text">Add a new workout</p>
+  </div>
+
+	<!-- Workout Details -->
+  <div *ngIf="selectedWorkout" @slideInOut>
+    <mat-card class="workout-details-card">
+      <mat-card-header>
+        <mat-card-title>Workout Details</mat-card-title>
+        <mat-card-subtitle>{{ selectedWorkout.date | date: 'dd.MM.yyyy HH:mm' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Duration:</strong> {{ selectedWorkout.duration }} minutes</p>
+        <p><strong>Type:</strong> {{ selectedWorkout.type === 0 ? 'Cardio' : selectedWorkout.type === 1 ? 'Strength' : 'Flexibility' }}</p>
+        <p><strong>Calories Burned:</strong> {{ selectedWorkout.caloriesBurned }} kcal</p>
+        <p><strong>Intensity:</strong> {{ selectedWorkout.intensity }}/10</p>
+        <p><strong>Fatigue:</strong> {{ selectedWorkout.fatigue }}/10</p>
+        <p><strong>Notes:</strong> {{ selectedWorkout.notes }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="clearSelectedWorkout()">Back to List</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div *ngIf="workouts.length === 0" class="no-workouts">
+    No workouts available. Start adding your workouts!
+  </div>
+  <div class="grid" *ngIf="workouts.length > 0">
+    <mat-card class="workout-card" *ngFor="let workout of workouts" (click)="selectWorkout(workout)">
+      <mat-card-header>
+        <mat-card-title>
+					{{ workout.type === 0 ? 'Cardio' : workout.type === 1 ? 'Strength' : 'Flexibility' }}
+				</mat-card-title>
+        <mat-card-subtitle>{{ workout.date | date: 'dd.MM.yyyy HH:mm' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Duration:</strong> {{ workout.duration }} minutes</p>
+        <p><strong>Calories Burned:</strong> {{ workout.caloriesBurned }} kcal</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<div class="workouts-container" *ngIf="user && user.username == ''">
+  <div *ngIf="workouts.length === 0" class="no-workouts">
+    Log In or Register to start your workout journey!
+  </div>
+</div>
+
+  
