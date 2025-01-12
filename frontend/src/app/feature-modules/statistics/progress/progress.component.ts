@@ -53,7 +53,12 @@ export class ProgressComponent {
     },
     scales: {
       x: { type: 'category' },
-      y: { beginAtZero: true },
+      y: {
+        beginAtZero: true,
+        ticks: {
+          stepSize: 1,
+        },
+      },
     },
   };
 
@@ -84,14 +89,24 @@ export class ProgressComponent {
 
   prepareChartData(): void {
     if (this.progress) {
-      const labels = this.progress.weeklyProgress.map((week) => `Week ${week.week}`);
-      const totalDurations = this.progress.weeklyProgress.map((week) => week.statistics.totalDuration);
-      const totalWorkouts = this.progress.weeklyProgress.map((week) => week.statistics.totalWorkouts);
-      const averageIntensities = this.progress.weeklyProgress.map((week) => week.statistics.averageIntensity);
-      const averageFatigues = this.progress.weeklyProgress.map((week) => week.statistics.averageFatigue);
+      const allWeeks = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+  
+      const totalDurations = Array(4).fill(0);
+      const totalWorkouts = Array(4).fill(0);
+      const averageIntensities = Array(4).fill(0);
+      const averageFatigues = Array(4).fill(0);
 
+      this.progress.weeklyProgress.forEach((week) => {
+        const weekIndex = week.week - 1; 
+        if (weekIndex >= 0 && weekIndex < 4) {
+          totalDurations[weekIndex] = week.statistics.totalDuration || 0;
+          totalWorkouts[weekIndex] = week.statistics.totalWorkouts || 0;
+          averageIntensities[weekIndex] = week.statistics.averageIntensity || 0;
+          averageFatigues[weekIndex] = week.statistics.averageFatigue || 0;
+        }
+      });
       this.totalDurationData = {
-        labels,
+        labels: allWeeks,
         datasets: [
           {
             label: 'Total Duration (mins)',
@@ -100,11 +115,10 @@ export class ProgressComponent {
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
           },
-        ],
+        ]
       };
-
       this.totalWorkoutsData = {
-        labels,
+        labels: allWeeks,
         datasets: [
           {
             label: 'Total Workouts',
@@ -115,9 +129,8 @@ export class ProgressComponent {
           },
         ],
       };
-
       this.averageIntensityData = {
-        labels,
+        labels: allWeeks,
         datasets: [
           {
             label: 'Average Intensity',
@@ -128,9 +141,8 @@ export class ProgressComponent {
           },
         ],
       };
-
       this.averageFatigueData = {
-        labels,
+        labels: allWeeks,
         datasets: [
           {
             label: 'Average Fatigue',

@@ -27,8 +27,8 @@ def print_menu():
     print("\n" + Fore.CYAN + "Select an option:")
     print(Fore.GREEN + "1) Run app with migrations")
     print(Fore.GREEN + "2) Run app without migrations")
-    print(Fore.YELLOW + "4) Shut down your app")
-    print(Fore.RED + "5) Exit")
+    print(Fore.YELLOW + "3) Shut down your app")
+    print(Fore.RED + "4) Exit")
 
 def main():
     while True:
@@ -39,9 +39,9 @@ def main():
             run_app(apply_migrations=True)
         elif choice == '2':
             run_app(apply_migrations=False)
-        elif choice == '4':
+        elif choice == '3':
             shut_down_app()
-        elif choice == '5':
+        elif choice == '4':
             print(Fore.GREEN + "Exiting...")
             break
         else:
