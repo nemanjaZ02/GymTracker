@@ -27,6 +27,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+DatabaseMigrator.ApplyMigrations(app.Services);
 
 if (app.Environment.IsDevelopment())
 {
