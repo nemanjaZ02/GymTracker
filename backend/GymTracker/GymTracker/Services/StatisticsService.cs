@@ -57,7 +57,13 @@ namespace GymTracker.Services
         private int GetWeekOfMonth(DateTime date)
         {
             var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
-            return (int)Math.Ceiling((double)(date.Day + (int)firstDayOfMonth.DayOfWeek) / 7);
+            int firstDayOfWeek = (int)firstDayOfMonth.DayOfWeek;
+            if (firstDayOfWeek == 0)
+            {
+                firstDayOfWeek = 7;
+            }
+            int dayDifference = date.Day + firstDayOfWeek - 1;
+            return (dayDifference + 6) / 7;
         }
     }
 }
