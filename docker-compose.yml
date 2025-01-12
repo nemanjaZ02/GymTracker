@@ -22,7 +22,7 @@ services:
       dockerfile: GymTracker/Dockerfile
     container_name: gymtracker-api
     environment:
-      - APPLY_MIGRATIONS=false
+      - APPLY_MIGRATIONS=true
     env_file:
       - ./backend/GymTracker/GymTracker/.env
     ports:
